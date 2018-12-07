@@ -4,9 +4,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-//HEROKU
-const port = process.env.PORT || 3000;
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
     extended: false
@@ -50,6 +47,6 @@ app.delete('/usuario', function(req, res) {
     res.json('delete Usuario')
 });
 
-app.listen(port, () => {
-    console.log(`Escuchando peticiones en el puerto ${ port }`);
+app.listen(process.env.PORT, () => {
+    console.log('Escuchando puerto: ', process.env.PORT);
 });
