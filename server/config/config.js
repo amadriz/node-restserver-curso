@@ -1,34 +1,26 @@
 //Objeto global que siempre esta corriendo en la aplicacion
 
-
-//====================
-//PUERTO
-//====================
-
+// ============================
+//  Puerto
+// ============================
 process.env.PORT = process.env.PORT || 3000;
 
-//====================
-//ENTORNO
-//====================
+
+// ============================
+//  Entorno
+// ============================
+//Si la variable no existe supone que estoy en dev (desarrollo)
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 
-//====================
-//BASE DE DATOS
-//====================
-
+// ============================
+//  Base de datos
+// ============================
 let urlDB;
 
-if (process.env.PORT === 'dev') {
+if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe';
 } else {
-    urlDB = 'cafe-user:Abc123@ds147668.mlab.com:47668/cafe';
+    urlDB = 'mongodb://cafeUser:Abc123@ds147668.mlab.com:47668/cafe';
 }
-
 process.env.URLDB = urlDB;
-
-//LOCAL
-//mongodb://localhost:27017/cafe
-
-//Mlab hosting
-//mongodb://<dbuser>:<dbpassword>@ds147668.mlab.com:47668/cafe

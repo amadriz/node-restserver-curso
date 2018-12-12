@@ -18,14 +18,15 @@ app.use(require('./routes/usuario'));
 
 
 //Para conectar a base de datos mongo
-mongoose.connect(process.env.URLDB, {
-    useNewUrlParser: true
-}, (err, res) => {
+mongoose.connect(process.env.URLDB, (err, res) => {
+
     if (err) throw err;
 
-    console.log('Base de datos online');
+    console.log('Base de datos ONLINE');
 
 });
+
+
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', process.env.PORT);
