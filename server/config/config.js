@@ -12,6 +12,16 @@ process.env.PORT = process.env.PORT || 3000;
 //Si la variable no existe supone que estoy en dev (desarrollo)
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
+// ============================
+//  Vencimiento del token 30 dias
+// ============================
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+// ============================
+//  SEED  DE AUTENTICACION 
+// ============================ 
+//Crear variable en heroku que sera el seed (seguridad para que no se vea en gitlab)
+process.env.SEED = process.env.SEED || 'este - es - el - seed - desarrollo';
 
 // ============================
 //  Base de datos

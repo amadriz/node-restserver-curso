@@ -51,7 +51,7 @@ let usuarioSchema = new Schema({
     }
 });
 
-//Para ocultar campo de contraseña
+//Para ocultar campo de PASSWORD
 usuarioSchema.methods.toJSON = function() {
 
     let user = this;

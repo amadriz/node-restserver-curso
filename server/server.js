@@ -1,10 +1,11 @@
 require('./config/config');
 
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+// INICIAR EXPRESS
+const app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
     extended: false
@@ -13,8 +14,9 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json())
 
-// Para importar y utilizar rutas del usuario.js
-app.use(require('./routes/usuario'));
+// CONFIGURACION GLOBAL DE RUTAS
+app.use(require('./routes/index'));
+
 
 
 //Para conectar a base de datos mongo

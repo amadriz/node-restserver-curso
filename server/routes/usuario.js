@@ -7,8 +7,10 @@ const Usuario = require('../models/usuario');
 
 const app = express();
 
+const { verificaToken, verificaAdmin_Role } = require('../middlewares/authentication');
 
-app.get('/usuario', function(req, res) {
+//Servicio tipo express     //Argumento para el middleware
+app.get('/usuario', verificaToken, (req, res) => {
 
 
     // Variable para skip || 0 es igual a la pagina 1
@@ -50,13 +52,14 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let body = req.body;
 
     let usuario = new Usuario({
         nombre: body.nombre,
         email: body.email,
+        //BCRYPT PARA ENCRIPTAR EL PASSWORD
         password: bcrypt.hashSync(body.password, 10),
         role: body.role
     });
@@ -82,7 +85,7 @@ app.post('/usuario', function(req, res) {
 
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -99,8 +102,6 @@ app.put('/usuario/:id', function(req, res) {
             });
         }
 
-
-
         res.json({
             ok: true,
             usuario: usuarioDB
@@ -110,7 +111,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 // Elimina REGISTROS solo cambia el estado a false para que no se vea; no borrarlo del todo.
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     //Para obtener el id
     let id = req.params.id;
